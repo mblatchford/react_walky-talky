@@ -2,15 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import InputBox from './InputBox';
 import OutputBox from './OutputBox';
-const leetify = require('leetify');
+
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
       input: "",
-      upper: "",
-      leet: ""
+      tranformation: ""
     }
   }
 
@@ -18,36 +17,53 @@ class App extends Component {
     
     this.setState({
         input: e, 
-        upper: e.toUpperCase(),
-        leet: leetify(e)
     });
   };
 
+  _updateText = (newText) => {
+    console.log(this);
+    this.setState({
+        input: newText
+    });
+}
 
 
   render() {
     return (
       <div className="App">
-        <div>
+        <div className="inputBox">
           <InputBox 
-            onChange={(event) => this._onChange(event.target.value)}
+            // changeHandler={this._updateText}
             input = {this.state.input}
-          />
+            changeHandler = {this._updateText}
+            // changeHandler = {(event) => this._onChange(event.target.value)}
+      />
         </div>
-        <div>
+        <div className="output leet">
           <OutputBox 
-            input = {this.state.input}
+            input = {this.state.input}       
           />
         </div>
-        <div>
-        <OutputBox 
-          upper = {this.state.upper}
-        />
+        <div className="output upper">
+          <OutputBox 
+              input = {this.state.input}
+              transformation = 'upper'
+
+          />
         </div>
-        <div>
-        <OutputBox 
-          leet = {this.state.leet}
-        />
+        <div className="output leet">
+          <OutputBox 
+              input = {this.state.input}
+              transformation = 'leet'
+
+          />
+        </div>
+        <div className="output upperLeet">
+          <OutputBox  
+              input = {this.state.input}
+              transformation = 'upperLeet'
+
+          />
         </div>
       </div>
     );

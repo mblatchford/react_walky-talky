@@ -5,7 +5,11 @@ function InputBox(props) {
         <form >
             <input 
             value ={props.input}
-            onChange={props.onChange}
+            // onChange={props.changeHandler}
+            onChange={(event) => {
+                // console.log(event.target.value);
+                props.changeHandler(event.target.value);
+            }}
             />
         </form>
     );
